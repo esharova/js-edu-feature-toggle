@@ -1,5 +1,7 @@
 .idea
 node_modules
+npm-debug.log
+.build
 
 dev-tools/feature-toggle-api
 dev-tools/mongodb_data
