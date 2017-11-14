@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Feature-toggle web interface",
   "scripts": {
-    "start": "npm run start-server && npm run watch-frontend",
+    "start": "npm run build-frontend && npm run start-server",
     "start-server": "node ./src/server/index.js",
     "test": "jest",
     "build-frontend": "webpack",
@@ -16,6 +16,7 @@
     "express-handlebars": "^3.0.0",
     "nock": "^9.0.27",
     "request": "^2.83.0",
+    "request-promise-native": "^1.0.5",
     "spectre.css": "^0.4.5"
   },
   "devDependencies": {

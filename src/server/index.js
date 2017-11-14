@@ -1,9 +1,12 @@
 const express = require('express')
 const exphbs  = require('express-handlebars');
-const request = require('request');
+const request = require('request-promise-native');
 
 const USE_MOCKS = process.env.USE_MOCKS === '1';
 const PORT = process.env.PORT || 3000;
+
+const FEATURES_API_HOST = process.env.FEATURES_API_HOST || 'localhost';
+const FEATURES_API_PORT = process.env.FEATURES_API_PORT || '8080';
 
 USE_MOCKS && require('./mock/mock');
 
@@ -45,7 +48,7 @@ app.get('/', function (req, res) {
        res.render('home', {
            title: 'Feature toggle UI'
        });
-   })
+   });
 });
 
 app.listen(PORT, () => {

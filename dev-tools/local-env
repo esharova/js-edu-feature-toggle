@@ -19,5 +19,4 @@ case "$COMMAND" in
   *)
     echo "use command [start|stop|clean]"
   ;;
-esacc
-
+esac
