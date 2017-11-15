@@ -7,5 +7,5 @@ function createElement(tagName, text) {
     return element;
 }
 
-let el = createElement('h2', 'Клиентский JS работает!');
-document.querySelector('.container').append(el);
+// let el = createElement('h2', 'Клиентский JS работает!');
+// document.querySelector('.container').append(el);

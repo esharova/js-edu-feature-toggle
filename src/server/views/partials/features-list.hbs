@@ -1,0 +1,25 @@
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Название фичи</th>
+            <th>Описание</th>
+            <th>Доступность</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each features}}
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ description }}</td>
+                <td>
+                    <div class="form-group">
+                        <label class="form-switch">
+                            <input type="checkbox" {{#if enable }} checked {{/if }} disabled>
+                            <i class="form-icon"></i> Включить фичу
+                        </label>
+                    </div>
+                </td>
+            </tr>
+        {{/each}}
+    </tbody>
+</table>
