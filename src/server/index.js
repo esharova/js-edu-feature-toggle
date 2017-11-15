@@ -1,6 +1,6 @@
 const express = require('express')
 const exphbs  = require('express-handlebars');
-const request = require('request');
+const request = require('request-promise-native');
 
 const USE_MOCKS = process.env.USE_MOCKS === '1';
 const PORT = process.env.PORT || 3000;
@@ -24,28 +24,36 @@ app.use('/assets', express.static('.build/assets'));
 
 // Healthcheck
 app.get('/health', function (req, res) {
-   request.get('http://localhost:8080/health', (error, response, body) => {
-       if (error) {
-           res.send(error);
-           return;
-       }
+   const options = {
+       method: 'GET',
+       uri: 'http://localhost:8080/health'
+   };
 
-       res.send(body);
-   })
+   request(options)
+       .then(response => {
+            res.send(response);
+        })
+       .catch(err => {
+           res.send(err);
+        })
 });
 
 // Index page
 app.get('/', function (req, res) {
-   request.get('http://localhost:8080/health', (error, response, body) => {
-       if (error) {
-           res.status(500).send('Error');
-           return;
-       }
+    const options = {
+        method: 'GET',
+        uri: 'http://localhost:8080/health'
+    };
 
-       res.render('home', {
-           title: 'Feature toggle UI'
-       });
-   })
+    request(options)
+        .then(response => {
+            res.render('home', {
+                title: 'Feature toggle UI'
+            });
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        })
 });
 
 app.listen(PORT, () => {
