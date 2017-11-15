@@ -9,12 +9,4 @@ function createElement(tagName, text) {
     return element;
 }
 
-function clickHandler() {
-
-}
-
-let el = createElement('h2', 'Клиентский JS работает!');
-document.querySelector('.container').append(el);
-
-
 button.addEventListener('click', buttonClickHandler);
