@@ -16,8 +16,6 @@ const FEATURES_API_ENDPOINT = url.format({
     port: FEATURES_API_PORT
 });
 
-console.log(FEATURES_API_ENDPOINT);
-
 USE_MOCKS && require('./mock/mock');
 
 let app = express();
@@ -42,14 +40,18 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 
 // Healthcheck
 app.get('/health', function (req, res) {
-   request.get(`${FEATURES_API_ENDPOINT}/health`, (error, response, body) => {
-       if (error) {
-           res.status(500).send(error);
-           return;
-       }
+   const options = {
+       method: 'GET',
+       uri: 'http://localhost:8080/health'
+   };
 
-       res.send(body);
-   })
+   request(options)
+       .then(response => {
+            res.send(response);
+        })
+       .catch(err => {
+           res.send(err);
+        })
 });
 
 // Index page
@@ -67,10 +69,9 @@ app.get('/', function (req, res) {
         });
 });
 
+// Add feature
 app.post('/', function (req, res) {
     let formdata = req.body;
-
-    console.log(formdata);
 
     request
         .post(`${FEATURES_API_ENDPOINT}/management/feature`, {
