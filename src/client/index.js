@@ -2,6 +2,7 @@ import 'spectre.css/dist/spectre.min.css';
 import './style.css';
 
 import buttonClickHandler from './load-data';
+import toggleFeatureHandler from './toggle-features';
 
 function createElement(tagName, text) {
     let element = document.createElement(tagName);
@@ -9,4 +10,6 @@ function createElement(tagName, text) {
     return element;
 }
 
-button.addEventListener('click', buttonClickHandler);
+let featuresTable = document.getElementById('features-table');
+
+featuresTable.addEventListener('click', toggleFeatureHandler);

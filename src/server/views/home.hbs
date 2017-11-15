@@ -1,6 +1,49 @@
 <div class='container'>
     <h1>{{{ title }}}</h1>
-    <button id="button">
-        Жмя
-    </button>
+    <table class="table table-striped table-hover" id='features-table'>
+    <thead>
+      <tr>
+        <th>Название фичи</th>
+        <th>Описание</th>
+        <th>Доступность</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each features}}
+      <tr>
+        <td>{{name}}</td>
+        <td>{{description}}</td>
+        <td>
+          <div class="form-group">
+            <label class="form-switch">
+                  <input type="checkbox" {{#if enable}}checked{{/if}} disabled data-feature-id={{ id }}>
+                    <i class="form-icon"></i>
+                    {{#if enable}}Выключить фичу {{else}} Включить фичу {{/if}}
+              </label>
+          </div>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+    <form method='post' action='/'>
+        <h3 class='mt-6'>Add new feature</h3>
+        <div class="form-group">
+          <label class="form-label" for="feature-name">Name</label>
+          <input class="form-input" type="text" id="feature-name" name='name'>
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="feature-description">Description</label>
+            <textarea class="form-input" id="feature-description" rows="3" name='description'></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-switch">
+            <input type="checkbox" name='enable' value='1'>
+            <i class="form-icon"></i> Enabled
+          </label>
+        </div>
+        <div class="form-group">
+            <button class='btn btn-large' type='submit'>Add</button>
+        </div>
+    </form>
 </div>
